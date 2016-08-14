@@ -4,6 +4,8 @@ from ardrone_autonomy.msg import Navdata
 from sensor_msgs.msg import CameraInfo
 from geometry_msgs.msg import Twist
 import numpy as np
+import math
+import tf
 
 
 P = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
@@ -32,14 +34,21 @@ def callback(data):
                 tag_orientation = (data.tags_orientation[i] + 90.0)
                 if tag_orientation >= 360:
                     tag_orientation -= 360
-                msg = Twist()
-                msg.linear.x = dX
-                msg.linear.y = dY
-                msg.linear.z = 0
-                msg.angular.x = 0
-                msg.angular.y = 0
-                msg.angular.z = tag_orientation
-                pub.publish(msg)
+
+                br = tf.TransformBroadcaster()
+                br.sendTransform((dX/100, dY/100, cZ/100),
+                     tf.transformations.quaternion_from_euler(0, 0, math.radians(tag_orientation)),
+                     rospy.Time.now(),
+                     "odom",
+                     "tag")
+                # msg = Twist()
+                # msg.linear.x = dX
+                # msg.linear.y = dY
+                # msg.linear.z = 0
+                # msg.angular.x = 0
+                # msg.angular.y = 0
+                # msg.angular.z = tag_orientation
+                # pub.publish(msg)
 
 
 def estimate_alphaX_and_alphaY(xc,yc,zc):

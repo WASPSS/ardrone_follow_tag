@@ -4,6 +4,7 @@ find_package(catkin REQUIRED COMPONENTS
   ardrone_autonomy
   geometry_msgs
   rospy
+  tf
 )
 
 catkin_package(
