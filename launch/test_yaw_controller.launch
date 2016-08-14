@@ -45,6 +45,21 @@
     <remap from="setpoint" to="/y_controller/setpoint" />
   </node>
 
+  <node name="controller" pkg="pid" type="controller" ns="yaw_controller" output="screen" >
+    <param name="node_name" value="yaw_pid" />
+    <param name="Kp" value="-0.4" />
+    <param name="Ki" value="0.0" />
+    <param name="Kd" value="0.0" />
+    <param name="upper_limit" value="100" />
+    <param name="lower_limit" value="-100" />
+    <param name="windup_limit" value="10" />
+    <param name="cutoff_frequency" value="10" />
+    <param name="diagnostic_period" value="0.25" />
+    <param name="max_loop_frequency" value="100.0" />
+    <param name="min_loop_frequency" value="0.0" />
+    <remap from="setpoint" to="/yaw_controller/setpoint" />
+  </node>
+
 
   <node name = "pose_estimation" pkg = "ardrone_follow_tag" type = "pose_estimation.py"/>
   <node name = "yaw_controller" pkg = "ardrone_follow_tag" type = "test_yaw_controller.py"/>
