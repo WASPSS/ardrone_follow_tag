@@ -62,7 +62,7 @@
 
 
   <node name = "pose_estimation" pkg = "ardrone_follow_tag" type = "pose_estimation.py"/>
-  <node name = "yaw_controller" pkg = "ardrone_follow_tag" type = "test_yaw_controller.py"/>
+  <!-- <node name = "yaw_controller" pkg = "ardrone_follow_tag" type = "test_yaw_controller.py"/> -->
 
   <node name="rqt_plot" pkg="rqt_plot" type="rqt_plot"
     args="/x_controller/control_effort/data /x_controller/state/data /y_controller/control_effort/data y_controller/state/data" />
